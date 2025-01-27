@@ -23,8 +23,7 @@ void setup() {
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) delay(500);
   
-  // Calibration code (same as before)
-  // ...
+  // Calibration code 
   Serial.println("Calibrating sensor...");
   float totalVoltage = 0;
   for (int i = 0; i < 1000; i++) {
@@ -38,10 +37,8 @@ void setup() {
 void loop() {
   float totalVoltage = 0;
   
-  // Read sensor data (same as before)
-  // ...
+  // Read sensor data 
   
-
   // Sample sensor data
   for (int i = 0; i < NUM_SAMPLES; i++) {
     totalVoltage += analogRead(SENSOR_PIN) * (VREF / ADC_RESOLUTION);
