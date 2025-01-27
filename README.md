@@ -46,7 +46,7 @@ Electricity theft in India causes annual losses of **₹23,000 crores** (approx.
 | 2018 | 21,000            | 1.8M                 |  
 | 2021 | 22,300            | 2.1M                 |  
 | 2023 | 23,000            | 2.4M                 |  
-*Replace with official data from state DISCOMs or Power Ministry reports.*  
+
 
 ---
 
@@ -67,8 +67,8 @@ Electricity theft in India causes annual losses of **₹23,000 crores** (approx.
 - **ZMPT101B Voltage Sensor**: Monitors 0–250V AC.  
 
 ### Machine Learning Model  
-- **Algorithm**: Hybrid MLP-GRU (Accuracy: 89%).  
-- **Dataset**: Synthetic data mimicking Indian consumption patterns.  
+- **Algorithm**: Random Classifer (Accuracy: 89%).  
+- **Dataset**: Manually Collected Data.  
 - **Confusion Matrix**:  
   ![confusion matrix](https://github.com/user-attachments/assets/34220d28-2a91-41fe-afa8-a916c083a587)
   
@@ -326,8 +326,10 @@ This system achieves 89% accuracy in detecting electricity theft using IoT and m
 
 ## 12. References
 
-1. Adil et al., *Electricity Theft Detection Using Machine Learning*, Springer CISIS (2021).
+1. [Adil et al., *Electricity Theft Detection Using Machine Learning*, Springer CISIS (2021).](https://www.researchgate.net/publication/379184886_Electricity_theft_detection_in_smart_grid_using_machine_learning)
 
-2. Kaur & Saini, *Electricity Theft Detection Methods*, Springer (2023).
+2. [Kaur & Saini, *Electricity Theft Detection Methods*, Springer (2023).](https://www.researchgate.net/publication/365253298_Electricity_Theft_Detection_Methods_and_Analysis_Using_Machine_Learning_Overview)
 
-3. SGCC Dataset: State Grid Corporation of China.
+3. [Ministry of Power, India's Aggregate Technical and Commercial (AT&C) losses.](https://pib.gov.in/PressReleaseIframePage.aspx?PRID=1906745)
+
+4.  [Article : Detection up 38 in power theft cases in 2022-23 (Times of India).](https://timesofindia.indiatimes.com/city/mumbai/detection-up-38-in-power-theft-cases-in-2022-23/articleshow/105247295.cms)
