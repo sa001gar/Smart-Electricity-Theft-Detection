@@ -1,6 +1,8 @@
 # Smart Electricity Theft Detection System  
-**Documentation**  
-*By Sagar Kundu*  
+**Documentation by Team**
+- *Sagar Kundu*
+- *Akash Karmakar*
+- *Debjit Goswami*
 
 ---
 
@@ -49,9 +51,15 @@ Electricity theft in India causes annual losses of **₹23,000 crores** (approx.
 ---
 
 ## 4. Implementation  
-### System Architecture  
-![System DFD](https://via.placeholder.com/800x400.png?text=Data+Flow+Diagram+-+IoT+to+Dashboard)  
-*Replace with your Data Flow Diagram (DFD).*  
+### System Architecture
+ - #### Taking data from esp32 using the endpoint `api/store-data` and train the model using Random Forest Classifier.
+ ![image](https://github.com/user-attachments/assets/b96af6e9-7361-4ea9-bd1a-3d974c4b31d2)
+
+
+ - #### Now send the data from esp32 to the endpoint `api/analyse` and receive the endpoint and redirect to the another endpoint `api/latest` for frontend integration with async call .
+ ![image](https://github.com/user-attachments/assets/518a620f-70e2-4112-a6ec-94466ca43a3b)
+
+
 
 ### Hardware Components  
 - **ESP32 Microcontroller**: Collects sensor data.  
@@ -62,23 +70,100 @@ Electricity theft in India causes annual losses of **₹23,000 crores** (approx.
 - **Algorithm**: Hybrid MLP-GRU (Accuracy: 89%).  
 - **Dataset**: Synthetic data mimicking Indian consumption patterns.  
 - **Confusion Matrix**:  
-  ![Confusion Matrix](https://via.placeholder.com/400x300.png?text=Confusion+Matrix+Placeholder)  
+  ![confusion matrix](https://github.com/user-attachments/assets/34220d28-2a91-41fe-afa8-a916c083a587)
+  
 
 ---
 
 ## 5. Project Code  
 ### IoT Sensor Code (ESP32)  
 ```cpp
-// Add your full Arduino code here
 #include <WiFi.h>
 #include <HTTPClient.h>
 
+#define SENSOR_PIN 34
+const float ACS712_SENSITIVITY = 0.185;
+const int ADC_RESOLUTION = 4096;
+const float VREF = 3.3;
+const float NO_LOAD_VOLTAGE = VREF / 2;
+const int NUM_SAMPLES = 100;
+
+const char* ssid = "<my-ssid>";
+const char* password = "<my-password>";
+
+// Device metadata
+const String POLE_ID = "POLE_001";
+const String AREA_NAME = "Netaji Subhas Pally , Durgapur";
+const String LOCATION = "23.484098878057395, 87.32089780205827";  // Latitude,Longitude
+
+float calibrationOffset = 0;
+
 void setup() {
-  // Hardware initialization
+  Serial.begin(250000);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) delay(500);
+  
+  // Calibration code 
+  Serial.println("Calibrating sensor...");
+  float totalVoltage = 0;
+  for (int i = 0; i < 1000; i++) {
+    totalVoltage += analogRead(SENSOR_PIN) * (VREF / ADC_RESOLUTION);
+    delay(1);
+  }
+  calibrationOffset = (totalVoltage / 1000.0) - NO_LOAD_VOLTAGE;
+  Serial.println("Calibration complete!");
 }
 
 void loop() {
-  // Sensor data collection and API POST logic
+  float totalVoltage = 0;
+  
+  // Read sensor data 
+  
+  // Sample sensor data
+  for (int i = 0; i < NUM_SAMPLES; i++) {
+    totalVoltage += analogRead(SENSOR_PIN) * (VREF / ADC_RESOLUTION);
+    delay(10);
+  }
+  float averageVoltage = totalVoltage / NUM_SAMPLES;
+
+  // Calculate current
+  float current = (averageVoltage - NO_LOAD_VOLTAGE - calibrationOffset) / ACS712_SENSITIVITY;
+
+  // Set current to 0 if it is less than 0.020
+  if (current < 0.020) {
+    current = 0.000;
+  }
+  // Calculate power
+  float power = current * averageVoltage;
+  
+
+  send_to_server(current, averageVoltage, power);
+  delay(3000);
+}
+
+void send_to_server(float current, float voltage, float power) {
+  HTTPClient http;
+  http.begin("http://192.168.1.36:5000/api/analyse");
+  http.addHeader("Content-Type", "application/json");
+
+  String payload = String("{") +
+    "\"pole_id\":\"" + POLE_ID + "\"," +
+    "\"area_name\":\"" + AREA_NAME + "\"," +
+    "\"location\":\"" + LOCATION + "\"," +
+    "\"current\":" + String(current) + "," +
+    "\"voltage\":" + String(voltage) + "," +
+    "\"power\":" + String(power) + "}";
+
+  int httpCode = http.POST(payload);
+  
+  if (httpCode == HTTP_CODE_OK) {
+    String response = http.getString();
+    Serial.println("Server Response: " + response);
+  } else {
+    Serial.println("HTTP Error: " + String(httpCode));
+  }
+  
+  http.end();
 }
 ```
 ### Machine Learning Training (Python)
@@ -177,7 +262,8 @@ if __name__ == '__main__':
 ## 6. Frontend Dashboard
 
 ### Dashboard
-![Dashboard Screenshot](path_to_your_dashboard_screenshot.png)
+![Dashboard](https://github.com/user-attachments/assets/549b3ee0-5766-46d2-959f-5668f4f02e6e)
+
 
 ### Features
 - **Real-time Voltage/Current Graphs**: The dashboard provides real-time visualizations of voltage and current data, making it easier to track electricity consumption patterns.
@@ -223,12 +309,12 @@ if __name__ == '__main__':
 ## 10. GitHub Repository
 
 ### Codebase Link
-🔗 [github.com/yourusername/smart-theft-detection](https://github.com/yourusername/smart-theft-detection)
+🔗 [github.com/sa001gar/Smart-Electricity-Theft-Detection](https://github.com/sa001gar/Smart-Electricity-Theft-Detection)
 
 ### QR Code for Quick Access
-![GitHub QR](path_to_generated_qr_code.png)
+![qr_code](https://github.com/user-attachments/assets/fdcdf858-0b82-40b2-9f1b-1360177f8a82)
 
-Generate your QR code at [QR Code Generator](https://www.qr-code-generator.com/).
+
 
 ---
 
