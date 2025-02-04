@@ -88,13 +88,13 @@ const float VREF = 3.3;
 const float NO_LOAD_VOLTAGE = VREF / 2;
 const int NUM_SAMPLES = 100;
 
-const char* ssid = "<my-ssid>";
-const char* password = "<my-password>";
+const char* ssid = "<wifi-ssid>";
+const char* password = "<password>";
 
 // Device metadata
 const String POLE_ID = "POLE_001";
-const String AREA_NAME = "Netaji Subhas Pally , Durgapur";
-const String LOCATION = "23.484098878057395, 87.32089780205827";  // Latitude,Longitude
+const String AREA_NAME = "<address>";
+const String LOCATION = "<latitude, longitude>";  // Latitude,Longitude
 
 float calibrationOffset = 0;
 
