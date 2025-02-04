@@ -1,8 +1,9 @@
-# Smart Electricity Theft Detection System  
+# Smart Electricity Theft Detection System using ML (Machine Learning)
 **Documentation by Team**
-- *Sagar Kundu*
-- *Akash Karmakar*
-- *Debjit Goswami*
+- *Sagar Kundu* `Backend Developer`
+- *Akash Karmakar* `Frontend Developer`
+- *Debjit Goswami* `Frontend Developer`
+- *Ratul Chatterjee* `Hardware Engineer`
 
 ---
 
