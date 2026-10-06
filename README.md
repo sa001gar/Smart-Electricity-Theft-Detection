@@ -1,6 +1,7 @@
 # Smart Electricity Theft Detection System using ML (Machine Learning)
 **Documentation by Team**
 - *Sagar Kundu* `Backend`
+- *Koyel Das* `Research`
 - *Akash Karmakar* `Frontend`
 - *Debjit Goswami* `Frontend`
 - *Ratul Chatterjee* `Hardware`
@@ -273,18 +274,7 @@ if __name__ == '__main__':
 
 ---
 
-## 7. Project Showcase
-
-### Hardware Prototype
-
-#### Hardware Setup
-![Hardware Setup](path_to_your_hardware_implementation_photo.png)
-
-#### Field Testing
-![Pilot Deployment](path_to_your_pilot_deployment_photo.png)
-
----
-## 8. Challenges & Solutions
+## 7. Challenges & Solutions
 
 | **Challenge**         | **Solution**                  |
 |-----------------------|-------------------------------|
@@ -294,7 +284,7 @@ if __name__ == '__main__':
 
 ---
 
-## 9. Future Work
+## 8. Future Work
 
 ### Advanced Models
 - **XGBoost + CNN Hybrids**: Testing hybrid models combining XGBoost and Convolutional Neural Networks (CNNs) for improved performance in electricity theft detection.
@@ -307,7 +297,7 @@ if __name__ == '__main__':
 
 ---
 
-## 10. GitHub Repository
+## 9. GitHub Repository
 
 ### Codebase Link
 🔗 [github.com/sa001gar/Smart-Electricity-Theft-Detection](https://github.com/sa001gar/Smart-Electricity-Theft-Detection)
@@ -319,13 +309,13 @@ if __name__ == '__main__':
 
 ---
 
-## 11. Conclusion
+## 10. Conclusion
 
 This system achieves 89% accuracy in detecting electricity theft using IoT and machine learning technologies. Future efforts will focus on scaling the solution to reduce India's ₹23,000 crore annual electricity theft losses.
 
 ---
 
-## 12. References
+## 11. References
 
 1. [Adil et al., *Electricity Theft Detection Using Machine Learning*, Springer CISIS (2021).](https://www.researchgate.net/publication/379184886_Electricity_theft_detection_in_smart_grid_using_machine_learning)
 
